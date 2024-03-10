@@ -1,0 +1,29 @@
+.dark-form .form-control {
+    background-color: #45465d;
+    border: 1px solid #444;
+    color: #ddd;
+}
+
+.dark-form .form-control:focus {
+    background-color: #333;
+    border-color: #555;
+    color: #fff;
+    box-shadow: 0 0 0 0.2rem rgba(130, 138, 145, 0.25);
+}
+
+.dark-form .btn-light {
+    color: #333;
+    background-color: #fff;
+    border-color: #fff;
+}
+
+/* Assurez-vous que le texte reste lisible */
+.dark-form label, .dark-form .form-text {
+    color: #ccc;
+}
+
+/* Adapter le bouton pour mieux correspondre au thème sombre */
+.dark-form .btn-primary {
+    background-color: #0056b3;
+    border-color: #004085;
+}
