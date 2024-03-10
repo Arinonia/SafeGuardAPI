@@ -16,19 +16,11 @@ public class User {
     private String password;
     private LocalDateTime creationDate;
     private boolean using2fa = false;
+    @Enumerated(EnumType.STRING)
+    private Rank rank = Rank.USER;
     //private String githubAccessToken;
 
     public User() {}
-
-    public User(final Long id, final String username, final String email, final String password,
-                final LocalDateTime creationDate, final boolean using_2fa) {
-        this.id = id;
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.creationDate = creationDate;
-        this.using2fa = using_2fa;
-    }
 
     public Long getId() {
         return this.id;
@@ -76,5 +68,13 @@ public class User {
 
     public void setUsing2fa(final boolean using_2fa) {
         this.using2fa = using_2fa;
+    }
+
+    public Rank getRank() {
+        return this.rank;
+    }
+
+    public void setRank(final Rank rank) {
+        this.rank = rank;
     }
 }
