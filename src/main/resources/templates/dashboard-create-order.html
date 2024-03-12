@@ -11,72 +11,11 @@
 <body class="bg-dark text-white">
 <div class="sidebar">
     <h2 class="text-white text-center">Dashboard</h2>
-    <a href="/#"><i class="fas fa-home"></i> Home</a>
-    <a href="/dashboard/create-order"><i class="fas fa-plus-circle"></i> Créer une commande</a>
+    <a href="/dashboard"><i class="fas fa-home"></i> Home</a>
+    <a href="#"><i class="fas fa-plus-circle"></i> Créer une commande</a>
     <a href="/dashboard/settings"><i class="fas fa-cog"></i> Paramètres</a>
     <a href="/dashboard/statistics"><i class="fas fa-chart-bar"></i> Statistiques</a>
 </div>
-<div class="content">
-    <h1 class="text-center">Bienvenue sur votre Dashboard</h1>
-    <div class="container mt-5">
-        <h2>Utilisateurs</h2>
-        <table class="table table-dark table-hover">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nom d'utilisateur</th>
-                <th>Email</th>
-                <th>Rôle</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="user : ${users}">
-                <td th:text="${user.id}"></td>
-                <td th:text="${user.username}"></td>
-                <td th:text="${user.email}"></td>
-                <td th:text="${user.rank}"></td>
-                <td>
-                    <a href="#" class="btn btn-primary btn-sm">Éditer</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-
-        <h2>Commandes</h2>
-        <table class="table table-dark table-hover">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Type</th>
-                <th>Nom du client</th>
-                <th>Prix</th>
-                <th>Méthode de paiement</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="order : ${orders}">
-                <td th:text="${order.id}"></td>
-                <td th:text="${order.type}"></td>
-                <td th:text="${order.clientName}"></td>
-                <td th:text="${order.price}"></td>
-                <td th:text="${order.paymentMethod}"></td>
-                <td>
-                    <a href="#" class="btn btn-primary btn-sm">Éditer</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
-
-<!--<!DOCTYPE html>
-<body class="bg-dark text-white">
 <div class="container mt-4">
     <h2>Créer une nouvelle commande</h2>
     <form th:action="@{/dashboard/createOrder}" method="post">
@@ -97,6 +36,10 @@
         <div class="mb-3">
             <label for="clientName" class="form-label">Nom du Client</label>
             <input type="text" class="form-control" id="clientName" name="clientName" required>
+        </div>
+        <div class="mb-3">
+            <label for="projectName" class="form-label">Nom du Project</label>
+            <input type="text" class="form-control" id="projectName" name="projectName" required>
         </div>
         <div class="mb-3">
             <label for="clientDiscordId" class="form-label">ID Discord du Client</label>
@@ -124,4 +67,4 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
--->
+</html>

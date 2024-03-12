@@ -23,6 +23,10 @@
                             <input type="password" class="form-control" id="password" name="password" required>
                         </div>
                         <button type="submit" class="btn btn-light">Login</button>
+                        <p class="mt-2 text-muted">
+                            <a href="/register" class="text-light">No account? Create one here!</a>
+                        </p>
+                        <div th:if="${param.error}" class="alert alert-danger" role="alert">Invalid username or password.</div>
                     </form>
                 </div>
             </div>

@@ -31,6 +31,10 @@
                             <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
                         </div>
                         <button type="submit" class="btn btn-light">Register</button>
+                        <p class="mt-2 text-muted">
+                            <a href="/login" class="text-light">Already have an account? Login here!</a>
+                        </p>
+                        <div th:if="${errorMessage}" class="alert alert-danger" role="alert" th:text="${errorMessage}"></div>
                     </form>
                 </div>
             </div>

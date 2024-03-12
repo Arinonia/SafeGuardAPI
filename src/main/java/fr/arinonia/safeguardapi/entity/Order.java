@@ -13,6 +13,7 @@ public class Order {
     private Long id;
     @Enumerated(EnumType.STRING)
     private OrderType type = OrderType.OTHER;
+    private String projectName;
     private String clientName;
     private String clientDiscordId;
     private String clientEmail;
@@ -23,6 +24,8 @@ public class Order {
     private LocalDateTime deadline;
     private LocalDateTime finishedAt;
     private LocalDateTime deliveredAt;
+    @Enumerated(EnumType.STRING)
+    private OrderStatus orderStatus = OrderStatus.NOT_STARTED;
 
     public Order() {}
 
@@ -37,6 +40,12 @@ public class Order {
     }
     public void setType(final OrderType type) {
         this.type = type;
+    }
+    public String getProjectName() {
+        return this.projectName;
+    }
+    public void setProjectName(final String projectName) {
+        this.projectName = projectName;
     }
     public String getClientName() {
         return this.clientName;
@@ -91,5 +100,11 @@ public class Order {
     }
     public void setDeliveredAt(final LocalDateTime deliveredAt) {
         this.deliveredAt = deliveredAt;
+    }
+    public OrderStatus getOrderStatus() {
+        return this.orderStatus;
+    }
+    public void setOrderStatus(final OrderStatus orderStatus) {
+        this.orderStatus = orderStatus;
     }
 }
