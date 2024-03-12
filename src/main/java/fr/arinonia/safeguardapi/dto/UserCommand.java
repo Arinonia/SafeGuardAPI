@@ -7,7 +7,7 @@ public class UserCommand {
     private String password;
     private String confirmPassword;
 
-    public UserCommand(String username, String email, String password, String confirmPassword) {
+    public UserCommand(final String username, final String email, final String password, final String confirmPassword) {
         this.username = username;
         this.email = email;
         this.password = password;
@@ -17,34 +17,34 @@ public class UserCommand {
     public UserCommand() {}
 
     public String getUsername() {
-        return username;
+        return this.username;
     }
 
-    public void setUsername(String username) {
+    public void setUsername(final String username) {
         this.username = username;
     }
 
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(final String email) {
         this.email = email;
     }
 
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(final String password) {
         this.password = password;
     }
 
     public String getConfirmPassword() {
-        return confirmPassword;
+        return this.confirmPassword;
     }
 
-    public void setConfirmPassword(String confirmPassword) {
+    public void setConfirmPassword(final String confirmPassword) {
         this.confirmPassword = confirmPassword;
     }
 }

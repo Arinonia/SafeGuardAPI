@@ -55,10 +55,10 @@ public class User {
     }
 
     public LocalDateTime getCreationDate() {
-        return creationDate;
+        return this.creationDate;
     }
 
-    public void setCreationDate(LocalDateTime creationDate) {
+    public void setCreationDate(final LocalDateTime creationDate) {
         this.creationDate = creationDate;
     }
 
@@ -66,8 +66,8 @@ public class User {
         return this.using2fa;
     }
 
-    public void setUsing2fa(final boolean using_2fa) {
-        this.using2fa = using_2fa;
+    public void setUsing2fa(final boolean using2fa) {
+        this.using2fa = using2fa;
     }
 
     public Rank getRank() {

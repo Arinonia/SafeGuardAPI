@@ -24,13 +24,13 @@ public class DashboardController {
     }
 
     @GetMapping("/dashboard")
-    public String dashboard(Model model) {
+    public String dashboard(final Model model) {
         List<User> users = userService.getAllUsers();
         List<Order> orders = orderService.getAllOrders();
 
         model.addAttribute("users", users);
         model.addAttribute("orders", orders);
 
-        return "dashboard"; // Nom du fichier HTML de la vue (sans l'extension .html)
+        return "dashboard";
     }
 }

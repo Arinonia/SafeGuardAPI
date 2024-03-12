@@ -19,19 +19,19 @@ public class RegisterController {
     private final UserService userService;
 
     @Autowired
-    public RegisterController(UserService userService) {
+    public RegisterController(final UserService userService) {
         this.userService = userService;
     }
 
     @GetMapping
-    public String registerForm(Model model) {
+    public String registerForm(final Model model) {
         model.addAttribute("userCommand", new UserCommand());
         return "register";
     }
 
     @PostMapping
-    public String registerUser(@ModelAttribute("userCommand") UserCommand userCommand, RedirectAttributes redirectAttributes) {
-        Response response = userService.registerUser(userCommand.getUsername(), userCommand.getEmail(), userCommand.getPassword(), userCommand.getConfirmPassword());
+    public String registerUser(final @ModelAttribute("userCommand") UserCommand userCommand, final RedirectAttributes redirectAttributes) {
+        Response response = this.userService.registerUser(userCommand.getUsername(), userCommand.getEmail(), userCommand.getPassword(), userCommand.getConfirmPassword());
 
         if (!response.isSuccess()) {
             redirectAttributes.addFlashAttribute("errorMessage", response.getErrorMessage());

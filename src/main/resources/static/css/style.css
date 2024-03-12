@@ -1,3 +1,74 @@
+:root {
+    --cyan: #00bcd4;
+    --deep-cyan: #0097a7;
+    --light-cyan: #b2ebf2;
+    --very-light-cyan: #e0f7fa;
+    --dark: #37474f;
+    --light: #eceff1;
+}
+
+body {
+    background-color: var(--light);
+    color: var(--dark);
+    font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    padding-top: 20px;
+}
+
+.sidebar {
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding: 20px 0;
+    width: 250px;
+    background-color: var(--dark);
+    color: var(--light);
+}
+.sidebar a {
+    color: var(--light);
+    padding: 10px 15px;
+    text-decoration: none;
+    display: block;
+}
+.sidebar a:hover {
+    background-color: var(--deep-cyan);
+    color: var(--very-light-cyan);
+}
+
+.content {
+    margin-left: 250px;
+    padding: 20px;
+}
+.content h1 {
+    color: var(--deep-cyan);
+}
+
+.btn-primary {
+    background-color: var(--deep-cyan);
+    border-color: var(--deep-cyan);
+    color: var(--light);
+}
+
+.btn-primary:hover {
+    background-color: var(--cyan);
+    border-color: var(--cyan);
+}
+
+.table-dark {
+    background-color: var(--dark);
+    color: var(--light-cyan);
+}
+
+.table-dark thead th {
+    border-bottom-color: var(--cyan);
+}
+
+.table-hover tbody tr:hover {
+    background-color: var(--very-light-cyan);
+    color: var(--dark);
+}
+
+
 .dark-form .form-control {
     background-color: #45465d;
     border: 1px solid #444;
@@ -17,13 +88,33 @@
     border-color: #fff;
 }
 
-/* Assurez-vous que le texte reste lisible */
 .dark-form label, .dark-form .form-text {
     color: #ccc;
 }
 
-/* Adapter le bouton pour mieux correspondre au thème sombre */
 .dark-form .btn-primary {
     background-color: #0056b3;
     border-color: #004085;
+}
+
+.navbar-flat {
+    background-color: #343a40;
+    border-bottom: 2px solid #495057;
+}
+.navbar-flat .navbar-brand, .navbar-flat .nav-link {
+    color: #adb5bd !important;
+}
+.navbar-flat .nav-link {
+    margin-right: 1rem;
+}
+.navbar-flat .nav-link:hover {
+    color: #ffffff !important;
+}
+.btn-dashboard {
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+}
+.btn-dashboard:hover {
+    background-color: #0056b3;
 }

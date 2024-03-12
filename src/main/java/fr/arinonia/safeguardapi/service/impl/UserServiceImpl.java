@@ -48,14 +48,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public User updateUser(User userDetails, final Long id) {
+    public User updateUser(final User userDetails, final Long id) {
         return this.userRepository.findById(id).map(user -> {
             user.setUsername(userDetails.getUsername());
             user.setEmail(userDetails.getEmail());
             user.setPassword(userDetails.getPassword());
             user.setCreationDate(userDetails.getCreationDate());
             user.setUsing2fa(userDetails.isUsing2fa());
-            return userRepository.save(user);
+            return this.userRepository.save(user);
         }).orElseThrow(() -> new RuntimeException("User not found with id " + id));
     }
 
@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public Response registerUser(String username, String email, String password, String cPassword) {
+    public Response registerUser(final String username, final String email, final String password, final String cPassword) {
         final Response response = new Response();
 
         if (!password.equals(cPassword)) {
@@ -103,7 +103,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
         return userRepository.findByUsername(username)
                 .map(user -> new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), new ArrayList<>()))
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));

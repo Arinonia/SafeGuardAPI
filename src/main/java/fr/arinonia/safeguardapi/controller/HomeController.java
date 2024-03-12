@@ -19,7 +19,7 @@ public class HomeController implements ILoggedController {
     private final UserService userService;
 
     @Autowired
-    public HomeController(UserService userService) {
+    public HomeController(final UserService userService) {
         this.userService = userService;
     }
 

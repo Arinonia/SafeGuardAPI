@@ -1,26 +1,100 @@
 <!DOCTYPE html>
-<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+
 </head>
 <body class="bg-dark text-white">
 
-<!-- Navbar ici -->
-<!-- Formulaire de Création d'une Commande -->
+<div class="sidebar">
+    <h2 class="text-white text-center">Dashboard</h2>
+    <a href="/#"><i class="fas fa-home"></i> Home</a>
+    <a href="/dashboard/create-order"><i class="fas fa-plus-circle"></i> Créer une commande</a>
+    <a href="/dashboard/settings"><i class="fas fa-cog"></i> Paramètres</a>
+    <a href="/dashboard/statistics"><i class="fas fa-chart-bar"></i> Statistiques</a>
+</div>
+
+<div class="content">
+    <h1 class="text-center">Bienvenue sur votre Dashboard</h1>
+    <div class="container mt-5">
+        <h2>Utilisateurs</h2>
+        <table class="table table-dark table-hover">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom d'utilisateur</th>
+                <th>Email</th>
+                <th>Rôle</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.id}"></td>
+                <td th:text="${user.username}"></td>
+                <td th:text="${user.email}"></td>
+                <td th:text="${user.rank}"></td>
+                <td>
+                    <a href="#" class="btn btn-primary btn-sm">Éditer</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <h2>Commandes</h2>
+        <table class="table table-dark table-hover">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Type</th>
+                <th>Nom du client</th>
+                <th>Prix</th>
+                <th>Méthode de paiement</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="order : ${orders}">
+                <td th:text="${order.id}"></td>
+                <td th:text="${order.type}"></td>
+                <td th:text="${order.clientName}"></td>
+                <td th:text="${order.price}"></td>
+                <td th:text="${order.paymentMethod}"></td>
+                <td>
+                    <a href="#" class="btn btn-primary btn-sm">Éditer</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+<!--<!DOCTYPE html>
+<body class="bg-dark text-white">
 <div class="container mt-4">
     <h2>Créer une nouvelle commande</h2>
     <form th:action="@{/dashboard/createOrder}" method="post">
         <div class="mb-3">
             <label for="type" class="form-label">Type</label>
             <select class="form-select" id="type" name="type">
-                <option>LAUNCHER</option>
-                <option>MCP</option>
-                <option>MCP_SPIGOT</option>
-                <option>PLUGIN</option>
-                <!-- Ajoutez d'autres options ici -->
+                <option value="LAUNCHER">Launcher</option>
+                <option value="MCP">MCP</option>
+                <option value="MCP_SPIGOT">MCP Spigot</option>
+                <option value="MCP_SERVER">MCP Server</option>
+                <option value="PLUGIN">Plugin</option>
+                <option value="MOD">Mod</option>
+                <option value="BOT_DISCORD">Bot Discord</option>
+                <option value="API">API</option>
+                <option value="OTHER">Autre</option>
             </select>
         </div>
         <div class="mb-3">
@@ -28,66 +102,29 @@
             <input type="text" class="form-control" id="clientName" name="clientName" required>
         </div>
         <div class="mb-3">
+            <label for="clientDiscordId" class="form-label">ID Discord du Client</label>
+            <input type="text" class="form-control" id="clientDiscordId" name="clientDiscordId">
+        </div>
+        <div class="mb-3">
+            <label for="clientEmail" class="form-label">Email du Client</label>
+            <input type="email" class="form-control" id="clientEmail" name="clientEmail">
+        </div>
+        <div class="mb-3">
             <label for="price" class="form-label">Prix</label>
             <input type="number" class="form-control" id="price" name="price" step="0.01" required>
         </div>
-        <!-- Ajoutez d'autres champs selon le modèle Order -->
+        <div class="mb-3">
+            <label for="paymentMethod" class="form-label">Méthode de Paiement</label>
+            <select class="form-select" id="paymentMethod" name="paymentMethod">
+                <option value="PAYPAL">PayPal</option>
+                <option value="PAYE_SAFECARD">PaySafeCard</option>
+                <option value="BANK">Banque</option>
+                <option value="OTHER">Autre</option>
+            </select>
+        </div>
         <button type="submit" class="btn btn-primary">Créer</button>
     </form>
 </div>
-
-<div class="container mt-5">
-    <h2>Utilisateurs</h2>
-    <table class="table table-dark table-hover">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nom d'utilisateur</th>
-            <th>Email</th>
-            <th>Rôle</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="user : ${users}">
-            <td th:text="${user.id}"></td>
-            <td th:text="${user.username}"></td>
-            <td th:text="${user.email}"></td>
-            <td th:text="${user.rank}"></td>
-            <td>
-                <a href="#" class="btn btn-primary btn-sm">Éditer</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-
-    <h2>Commandes</h2>
-    <table class="table table-dark table-hover">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Type</th>
-            <th>Nom du client</th>
-            <th>Prix</th>
-            <th>Méthode de paiement</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="order : ${orders}">
-            <td th:text="${order.id}"></td>
-            <td th:text="${order.type}"></td>
-            <td th:text="${order.clientName}"></td>
-            <td th:text="${order.price}"></td>
-            <td th:text="${order.paymentMethod}"></td>
-            <td>
-                <a href="#" class="btn btn-primary btn-sm">Éditer</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-</html>
+-->
