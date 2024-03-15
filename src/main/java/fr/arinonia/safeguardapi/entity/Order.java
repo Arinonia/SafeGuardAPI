@@ -26,6 +26,8 @@ public class Order {
     private LocalDateTime deliveredAt;
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus = OrderStatus.NOT_STARTED;
+    @Enumerated(EnumType.STRING)
+    private PaymentStatus paymentStatus = PaymentStatus.NOT_PAYED;
 
     public Order() {}
 
@@ -106,5 +108,13 @@ public class Order {
     }
     public void setOrderStatus(final OrderStatus orderStatus) {
         this.orderStatus = orderStatus;
+    }
+
+    public PaymentStatus getPaymentStatus() {
+        return this.paymentStatus;
+    }
+
+    public void setPaymentStatus(final PaymentStatus paymentStatus) {
+        this.paymentStatus = paymentStatus;
     }
 }

@@ -16,7 +16,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(final HttpSecurity http) throws Exception {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeRequests(authorise -> authorise.requestMatchers("/register", "/login", "/css/**", "/images/**", "/js/**").permitAll()//TODO @Deprecated have to look how to replace that
+                .authorizeRequests(authorise -> authorise.requestMatchers("/register", "/login", "/css/**", "/images/**", "/js/**", "/api/**").permitAll()//TODO @Deprecated have to look how to replace that
                         .anyRequest().authenticated())
                 .formLogin(httpSecurityFormLoginConfigurer -> {
                     httpSecurityFormLoginConfigurer.loginPage("/login");
