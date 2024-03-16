@@ -1,15 +1,33 @@
 :root {
-    --cyan: #00bcd4;
-    --deep-cyan: #0097a7;
-    --light-cyan: #b2ebf2;
-    --very-light-cyan: #e0f7fa;
-    --dark: #37474f;
-    --light: #eceff1;
+    --background-color: #263238;
+    --foreground-color: #B0BEC5;
+    --text-color: #607D8B;
+    --selection-background-color: #546E7A;
+    --selection-foreground-color: #FFFFFF;
+    --button-color: #2E3C43;
+    --sidebar-background-color: #32424A;
+    --disabled-color: #415967;
+    --contrast-color: #1E272C;
+    --active-color: #314549;
+    --border-color: #2A373E;
+    --highlight-color: #425B67;
+    --accent-color: #009688;
+    --error-color: #ff5370;
+    --link-color: #80cbc4;
+    --functions-color: #82aaff;
+    --keywords-color: #c792ea;
+    --tags-color: #f07178;
+    --strings-color: #c3e88d;
+    --operators-color: #89ddff;
+    --attributes-color: #ffcb6b;
+    --numbers-color: #f78c6c;
+    --parameters-color: #f78c6c;
+    --comments-color: #546e7a;
 }
 
 body {
-    background-color: var(--light);
-    color: var(--dark);
+    background-color: var(--background-color);
+    color: var(--text-color);
     font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
     padding-top: 20px;
 }
@@ -21,100 +39,112 @@ body {
     top: 0;
     padding: 20px 0;
     width: 250px;
-    background-color: var(--dark);
-    color: var(--light);
+    background-color: var(--sidebar-background-color);
+    color: var(--foreground-color);
 }
+
 .sidebar a {
-    color: var(--light);
+    color: var(--foreground-color);
     padding: 10px 15px;
     text-decoration: none;
     display: block;
 }
+
 .sidebar a:hover {
-    background-color: var(--deep-cyan);
-    color: var(--very-light-cyan);
+    background-color: var(--highlight-color);
+    color: var(--selection-foreground-color);
 }
 
 .content {
     margin-left: 250px;
     padding: 20px;
 }
+
 .content h1 {
-    color: var(--deep-cyan);
+    color: var(--accent-color);
 }
 
 .btn-primary {
-    background-color: var(--deep-cyan);
-    border-color: var(--deep-cyan);
-    color: var(--light);
+    background-color: var(--accent-color);
+    border-color: var(--border-color);
+    color: var(--selection-foreground-color);
 }
 
 .btn-primary:hover {
-    background-color: var(--cyan);
-    border-color: var(--cyan);
+    background-color: var(--highlight-color);
+    border-color: var(--highlight-color);
 }
 
 .table-dark {
-    background-color: var(--dark);
-    color: var(--light-cyan);
+    background-color: var(--sidebar-background-color);
+    color: var(--foreground-color);
 }
 
 .table-dark thead th {
-    border-bottom-color: var(--cyan);
+    border-bottom-color: var(--border-color);
 }
 
 .table-hover tbody tr:hover {
-    background-color: var(--very-light-cyan);
-    color: var(--dark);
+    background-color: var(--highlight-color);
+    color: var(--text-color);
 }
 
-
 .dark-form .form-control {
-    background-color: #45465d;
-    border: 1px solid #444;
-    color: #ddd;
+    background-color: var(--sidebar-background-color);
+    border: 1px solid var(--border-color);
+    color: var(--foreground-color);
 }
 
 .dark-form .form-control:focus {
-    background-color: #333;
-    border-color: #555;
-    color: #fff;
-    box-shadow: 0 0 0 0.2rem rgba(130, 138, 145, 0.25);
+    background-color: var(--contrast-color);
+    border-color: var(--accent-color);
+    color: var(--selection-foreground-color);
+    box-shadow: 0 0 0 0.2rem rgba(0, 150, 136, 0.25);
 }
 
 .dark-form .btn-light {
-    color: #333;
-    background-color: #fff;
-    border-color: #fff;
+    color: var(--background-color);
+    background-color: var(--foreground-color);
+    border-color: var(--foreground-color);
+}
+
+.dark-form .btn-light:hover {
+    background-color: var(--text-color);
+    border-color: var(--text-color);
 }
 
 .dark-form label, .dark-form .form-text {
-    color: #ccc;
+    color: var(--text-color);
 }
 
 .dark-form .btn-primary {
-    background-color: #0056b3;
-    border-color: #004085;
+    background-color: var(--accent-color);
+    border-color: var(--highlight-color);
 }
 
+.dark-form .btn-primary:hover {
+    background-color: var(--highlight-color);
+    border-color: var(--selection-background-color);
+}
 .navbar-flat {
-    background-color: #343a40;
-    border-bottom: 2px solid #495057;
+    background-color: var(--sidebar-background-color);
+    border-bottom: 2px solid var(--border-color);
 }
+
 .navbar-flat .navbar-brand, .navbar-flat .nav-link {
-    color: #adb5bd !important;
+    color: var(--foreground-color) !important;
 }
-.navbar-flat .nav-link {
-    margin-right: 1rem;
-}
+
 .navbar-flat .nav-link:hover {
-    color: #ffffff !important;
+    color: var(--selection-foreground-color) !important;
 }
+
 .btn-dashboard {
-    color: #fff;
-    background-color: #007bff;
+    color: var(--selection-foreground-color);
+    background-color: var(--accent-color);
     border: none;
 }
+
 .btn-dashboard:hover {
-    background-color: #0056b3;
+    background-color: var(--highlight-color);
 }

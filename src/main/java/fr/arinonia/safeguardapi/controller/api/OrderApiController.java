@@ -3,7 +3,6 @@ package fr.arinonia.safeguardapi.controller.api;
 import fr.arinonia.safeguardapi.dto.OrderInfoDto;
 import fr.arinonia.safeguardapi.entity.Order;
 import fr.arinonia.safeguardapi.entity.OrderStatus;
-import fr.arinonia.safeguardapi.entity.PaymentStatus;
 import fr.arinonia.safeguardapi.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,13 +21,6 @@ import java.util.stream.Collectors;
 public class OrderApiController {
     private final OrderService orderService;
 
-    /*
-    /api/
-        order/{orderId}
-        payment_status/{orderId}
-        get_orders_by_username/{username}
-        get_urgency_orders/
-     */
     @Autowired
     public OrderApiController(final OrderService orderService) {
         this.orderService = orderService;
