@@ -3,7 +3,7 @@ package fr.arinonia.safeguardapi.entity;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "orders")
@@ -20,10 +20,10 @@ public class Order {
     private BigDecimal price;
     @Enumerated(EnumType.STRING)
     private PaymentMethod paymentMethod = PaymentMethod.PAYPAL;
-    private LocalDateTime startedAt;
-    private LocalDateTime deadline;
-    private LocalDateTime finishedAt;
-    private LocalDateTime deliveredAt;
+    private LocalDate startedAt;
+    private LocalDate deadline;
+    private LocalDate finishedAt;
+    private LocalDate deliveredAt;
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus = OrderStatus.NOT_STARTED;
     @Enumerated(EnumType.STRING)
@@ -79,28 +79,28 @@ public class Order {
     public void setPaymentMethod(final PaymentMethod paymentMethod) {
         this.paymentMethod = paymentMethod;
     }
-    public LocalDateTime getStartedAt() {
+    public LocalDate getStartedAt() {
         return this.startedAt;
     }
-    public void setStartedAt(final LocalDateTime startedAt) {
+    public void setStartedAt(final LocalDate startedAt) {
         this.startedAt = startedAt;
     }
-    public LocalDateTime getDeadline() {
+    public LocalDate getDeadline() {
         return this.deadline;
     }
-    public void setDeadline(final LocalDateTime deadline) {
+    public void setDeadline(final LocalDate deadline) {
         this.deadline = deadline;
     }
-    public LocalDateTime getFinishedAt() {
+    public LocalDate getFinishedAt() {
         return this.finishedAt;
     }
-    public void setFinishedAt(final LocalDateTime finishedAt) {
+    public void setFinishedAt(final LocalDate finishedAt) {
         this.finishedAt = finishedAt;
     }
-    public LocalDateTime getDeliveredAt() {
+    public LocalDate getDeliveredAt() {
         return this.deliveredAt;
     }
-    public void setDeliveredAt(final LocalDateTime deliveredAt) {
+    public void setDeliveredAt(final LocalDate deliveredAt) {
         this.deliveredAt = deliveredAt;
     }
     public OrderStatus getOrderStatus() {
@@ -116,5 +116,25 @@ public class Order {
 
     public void setPaymentStatus(final PaymentStatus paymentStatus) {
         this.paymentStatus = paymentStatus;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", type=" + type +
+                ", projectName='" + projectName + '\'' +
+                ", clientName='" + clientName + '\'' +
+                ", clientDiscordId='" + clientDiscordId + '\'' +
+                ", clientEmail='" + clientEmail + '\'' +
+                ", price=" + price +
+                ", paymentMethod=" + paymentMethod +
+                ", startedAt=" + startedAt +
+                ", deadline=" + deadline +
+                ", finishedAt=" + finishedAt +
+                ", deliveredAt=" + deliveredAt +
+                ", orderStatus=" + orderStatus +
+                ", paymentStatus=" + paymentStatus +
+                '}';
     }
 }

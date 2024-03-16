@@ -4,14 +4,13 @@ import fr.arinonia.safeguardapi.entity.Order;
 import fr.arinonia.safeguardapi.entity.User;
 import fr.arinonia.safeguardapi.service.OrderService;
 import fr.arinonia.safeguardapi.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.validation.BindingResult;
 
 import java.util.List;
 
@@ -58,6 +57,25 @@ public class DashboardController {
     public String createOrder(@ModelAttribute Order order, RedirectAttributes redirectAttributes) {
         this.orderService.saveOrder(order);
         redirectAttributes.addFlashAttribute("successMessage", "Commande créée avec succès !");
+        return "redirect:/dashboard";
+    }
+
+    @GetMapping("/editOrder/{id}")
+    public String showEditOrderForm(final @PathVariable("id") long id, final Model model) {
+        final Order order = this.orderService.getOrderById(id);
+        model.addAttribute("order", order);
+        return "edit-order";
+    }
+
+    @PostMapping("/updateOrder/{id}")
+    public String updateOrder(@PathVariable("id") long id, @Valid Order order, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            order.setId(id);
+            return "edit-order";
+        }
+
+        this.orderService.saveOrder(order);
+        model.addAttribute("orders", orderService.getAllOrders());
         return "redirect:/dashboard";
     }
 }

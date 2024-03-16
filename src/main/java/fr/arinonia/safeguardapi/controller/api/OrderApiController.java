@@ -13,13 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 public class OrderApiController {
-    private OrderService orderService;
+    private final OrderService orderService;
 
     /*
     /api/
         order/{orderId}
         payment_status/{orderId}
         get_orders_by_username/{username}
+        get_urgency_orders/
      */
     @Autowired
     public OrderApiController(final OrderService orderService) {
@@ -29,15 +30,16 @@ public class OrderApiController {
     @GetMapping("/order/{id}")
     public OrderInfoDto getOrderInfo(final @PathVariable Long id) {
         final Order order = this.orderService.getOrderById(id);
-
-        final boolean isFullPaid = this.isOrderPayed(order);
-
-        return new OrderInfoDto(order.getId(), order.getType().name(), isFullPaid);
+        return OrderInfoDto.fromOrder(order);
     }
 
-    private boolean isOrderPayed(final Order order) {
-        return order.getPaymentStatus() == PaymentStatus.PAYED;
+    @GetMapping("/orderPaymentStatus/{id}")
+    public OrderInfoDto getOrderPaymentStatus(final @PathVariable Long id) {
+        final Order order = this.orderService.getOrderById(id);
+        return OrderInfoDto.fromOrderWithPaymentStatusOnly(order);
     }
+
+
 
 
 }

@@ -20,6 +20,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order saveOrder(final Order order) {
+        System.out.println(order.toString());
         return this.orderRepository.save(order);
     }
 
