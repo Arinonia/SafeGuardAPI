@@ -37,7 +37,7 @@
                 <td th:text="${user.email}"></td>
                 <td th:text="${user.rank}"></td>
                 <td>
-                    <a href="#" class="btn btn-primary btn-sm">Éditer</a>
+                    <a th:href="@{/dashboard/editUser/{id}(id=${user.id})}" class="btn btn-primary btn-sm">Éditer</a>
                 </td>
             </tr>
             </tbody>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit User</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2>Edit User</h2>
+    <form th:action="@{/editUser/{id}(id=${user.id})}" th:object="${user}" method="post">
+        <input type="hidden" th:field="*{id}">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" class="form-control" th:field="*{username}" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" class="form-control" th:field="*{email}" required>
+        </div>
+        <div class="form-group">
+            <label for="password">New Password</label>
+            <input type="password" id="password" class="form-control" th:field="*{password}">
+            <small id="passwordHelpBlock" class="form-text text-muted">
+                Leave blank to keep the current password.
+            </small>
+        </div>
+        <div class="form-group">
+            <label for="creationDate">Creation Date</label>
+            <input type="text" id="creationDate" class="form-control" th:field="*{creationDate}" disabled>
+        </div>
+        <div class="form-group">
+            <label for="using2fa">Using 2FA</label>
+            <input type="checkbox" id="using2fa" th:field="*{using2fa}">
+        </div>
+        <div class="form-group">
+            <label for="rank">Rank</label>
+            <select id="rank" class="form-control" th:field="*{rank}">
+                <option th:each="rank : ${T(fr.arinonia.safeguardapi.entity.Rank).values()}" th:value="${rank}" th:text="${rank}"></option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Update User</button>
+    </form>
+    <form th:action="@{/dashboard/deleteUser/{id}(id=${user.id})}" method="post" class="mt-3">
+        <button type="submit" class="btn btn-danger">Delete User</button>
+    </form>
+</div>
+
+</body>
+</html>

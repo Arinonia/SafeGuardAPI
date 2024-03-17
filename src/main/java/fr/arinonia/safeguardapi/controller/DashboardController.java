@@ -78,4 +78,11 @@ public class DashboardController {
         model.addAttribute("orders", orderService.getAllOrders());
         return "redirect:/dashboard";
     }
+
+    @GetMapping("/editUser/{id}")
+    public String showEditUserForm(final @PathVariable("id") long id, final Model model) {
+        final User user = this.userService.getUserById(id).orElseThrow();
+        model.addAttribute("user", user);
+        return "edit-user";
+    }
 }
