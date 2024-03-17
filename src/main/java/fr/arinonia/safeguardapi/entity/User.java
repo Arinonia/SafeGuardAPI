@@ -77,4 +77,17 @@ public class User {
     public void setRank(final Rank rank) {
         this.rank = rank;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + this.id +
+                ", username='" + this.username + '\'' +
+                ", email='" + this.email + '\'' +
+                ", password='" + this.password + '\'' +
+                ", creationDate=" + this.creationDate +
+                ", using2fa=" + this.using2fa +
+                ", rank=" + this.rank +
+                '}';
+    }
 }
