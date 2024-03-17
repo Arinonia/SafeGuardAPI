@@ -1,6 +1,7 @@
 package fr.arinonia.safeguardapi.controller;
 
 import fr.arinonia.safeguardapi.entity.Order;
+import fr.arinonia.safeguardapi.entity.OrderType;
 import fr.arinonia.safeguardapi.entity.User;
 import fr.arinonia.safeguardapi.service.OrderService;
 import fr.arinonia.safeguardapi.service.UserService;
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.validation.BindingResult;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/dashboard")
@@ -49,8 +52,10 @@ public class DashboardController implements ILoggedController {
     }
 
     @GetMapping("/statistics")
-    public String statistics() {
-        return "todo";
+    public String statistics(final Model model) {
+        final Map<OrderType, BigDecimal> averagePriceByType = this.orderService.averagePrice();
+        model.addAttribute("averagePriceByType", averagePriceByType);
+        return "statistics";
     }
 
     @GetMapping("/settings")
