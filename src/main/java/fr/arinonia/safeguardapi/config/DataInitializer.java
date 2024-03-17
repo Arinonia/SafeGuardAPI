@@ -7,6 +7,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Component
@@ -29,7 +30,7 @@ public class DataInitializer implements CommandLineRunner {
             defaultUser.setEmail("todo@todo.todo");
             defaultUser.setPassword(passwordEncoder.encode("123456789"));
             defaultUser.setRank(Rank.OWNER);
-            defaultUser.setCreationDate(LocalDateTime.now());
+            defaultUser.setCreationDate(LocalDate.now());
             this.userService.saveUser(defaultUser);
             System.out.println("creating default user: " + defaultUser);
         }

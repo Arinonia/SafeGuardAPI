@@ -3,6 +3,7 @@ package fr.arinonia.safeguardapi.entity;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -14,7 +15,7 @@ public class User {
     private String username;
     private String email;
     private String password;
-    private LocalDateTime creationDate;
+    private LocalDate creationDate;
     private boolean using2fa = false;
     @Enumerated(EnumType.STRING)
     private Rank rank = Rank.USER;
@@ -54,11 +55,11 @@ public class User {
         this.password = password;
     }
 
-    public LocalDateTime getCreationDate() {
+    public LocalDate getCreationDate() {
         return this.creationDate;
     }
 
-    public void setCreationDate(final LocalDateTime creationDate) {
+    public void setCreationDate(final LocalDate creationDate) {
         this.creationDate = creationDate;
     }
 

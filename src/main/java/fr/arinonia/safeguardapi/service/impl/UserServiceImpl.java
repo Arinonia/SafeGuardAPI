@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -95,7 +96,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         newUser.setUsername(username);
         newUser.setEmail(email);
         newUser.setPassword(this.passwordEncoder.encode(password));
-        newUser.setCreationDate(LocalDateTime.now());
+        newUser.setCreationDate(LocalDate.now());
         newUser.setUsing2fa(false);
         this.userRepository.save(newUser);
         response.setSuccess(true);

@@ -4,8 +4,11 @@ import fr.arinonia.safeguardapi.entity.Order;
 import fr.arinonia.safeguardapi.entity.User;
 import fr.arinonia.safeguardapi.service.OrderService;
 import fr.arinonia.safeguardapi.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,21 +19,23 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/dashboard")
-public class DashboardController {
+public class DashboardController implements ILoggedController {
 
     private final UserService userService;
     private final OrderService orderService;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public DashboardController(final UserService userService, final OrderService orderService) {
+    public DashboardController(final UserService userService, final OrderService orderService, final PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.orderService = orderService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping()
     public String dashboard(final Model model) {
-        List<User> users = userService.getAllUsers();
-        List<Order> orders = orderService.getAllOrders();
+        final List<User> users = userService.getAllUsers();
+        final List<Order> orders = orderService.getAllOrders();
 
         model.addAttribute("users", users);
         model.addAttribute("orders", orders);
@@ -84,5 +89,38 @@ public class DashboardController {
         final User user = this.userService.getUserById(id).orElseThrow();
         model.addAttribute("user", user);
         return "edit-user";
+    }
+
+    @PostMapping("/editUser/{id}")
+    public String updateUser(@PathVariable("id") long id, @Valid User user, BindingResult result, Model model, @RequestParam(required = false) String password) {
+        if (result.hasErrors()) {
+            user.setId(id);
+            System.out.println(result);
+            return "edit-user";
+        }
+
+        //careful IllegalArgumentException extends RuntimeException
+        final User existingUser = this.userService.getUserById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
+        if (password == null || password.isEmpty()) {
+            user.setPassword(existingUser.getPassword());
+        } else {
+            user.setPassword(this.passwordEncoder.encode(password));
+        }
+        user.setCreationDate(existingUser.getCreationDate());
+        this.userService.saveUser(user);
+        model.addAttribute("users", this.userService.getAllUsers());
+        return "redirect:/dashboard";
+    }
+
+    @PostMapping("/deleteUser/{id}")
+    public String deleteUser(@PathVariable("id") Long id, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+        final String currentUsername = this.getCurrentUsername();
+
+        if (userService.findByUsername(currentUsername).orElseThrow().getId().equals(id)) {
+            new SecurityContextLogoutHandler().logout(request, null, null);
+        }
+        this.userService.deleteUser(id);
+        redirectAttributes.addFlashAttribute("successMessage", "Utilisateur supprimé avec succès.");
+        return "redirect:/dashboard";
     }
 }
