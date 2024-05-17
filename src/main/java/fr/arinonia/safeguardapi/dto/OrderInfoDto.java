@@ -6,6 +6,17 @@ import fr.arinonia.safeguardapi.entity.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+/**
+ * Data Transfer Object (DTO) for {@link Order} entities.
+ * <p>
+ * This class is used to transfer order data between different layers of the application.
+ * It includes various fields that represent the details of an order, such as project name, client details, price, payment method, and order status.
+ * </p>
+ *
+ * &#64;author Arinonia
+ * &#64;version 1.0
+ * &#64;since 2024-05-17
+ */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class OrderInfoDto {
 
@@ -24,6 +35,24 @@ public class OrderInfoDto {
     private OrderStatus orderStatus;
     private PaymentStatus paymentStatus;
 
+    /**
+     * Constructs a new {@code OrderInfoDto} with the specified details.
+     *
+     * @param id the ID of the order.
+     * @param type the type of the order.
+     * @param projectName the name of the project.
+     * @param clientName the name of the client.
+     * @param clientDiscordId the Discord ID of the client.
+     * @param clientEmail the email of the client.
+     * @param price the price of the order.
+     * @param paymentMethod the payment method for the order.
+     * @param startedAt the date when the order was started.
+     * @param deadline the deadline for the order.
+     * @param finishedAt the date when the order was finished.
+     * @param deliveredAt the date when the order was delivered.
+     * @param orderStatus the status of the order.
+     * @param paymentStatus the payment status of the order.
+     */
     public OrderInfoDto(final Long id, final OrderType type, final String projectName, final String clientName,
                         final String clientDiscordId, final String clientEmail, final BigDecimal price,
                         final PaymentMethod paymentMethod, final LocalDate startedAt, final LocalDate deadline,
@@ -45,8 +74,17 @@ public class OrderInfoDto {
         this.paymentStatus = paymentStatus;
     }
 
+    /**
+     * Default constructor.
+     */
     public OrderInfoDto() {}
 
+    /**
+     * Creates an {@code OrderInfoDto} from the given {@link Order}.
+     *
+     * @param order the order to convert.
+     * @return the created {@code OrderInfoDto}.
+     */
     public static OrderInfoDto fromOrder(final Order order) {
         return new OrderInfoDto(
                 order.getId(),
@@ -65,11 +103,19 @@ public class OrderInfoDto {
                 order.getPaymentStatus());
     }
 
+    /**
+     * Creates an {@code OrderInfoDto} from the given {@link Order}, including only the payment status.
+     *
+     * @param order the order to convert.
+     * @return the created {@code OrderInfoDto} with only the payment status.
+     */
     public static OrderInfoDto fromOrderWithPaymentStatusOnly(final Order order) {
         final OrderInfoDto dto = new OrderInfoDto();
         dto.setPaymentStatus(order.getPaymentStatus());
         return dto;
     }
+
+    // Getter and setter methods
 
     public Long getId() {
         return this.id;
